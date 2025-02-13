@@ -36,6 +36,13 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	implementation 'mysql:mysql-connector-java:8.0.33' // 최신 버전의 MySQL 드라이버
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.projectlombok:lombok'
+
+	// JPA API 추가 (jakarta.persistence)
+	implementation group: 'jakarta.persistence', name: 'jakarta.persistence-api', version: '3.1.0'
 }
 
 tasks.named('test') {
