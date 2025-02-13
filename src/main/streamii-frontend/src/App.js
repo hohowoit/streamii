@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        fetch("http://localhost:8080/test/user")
+            .then((res) => res.json())
+            .then((data) => setUser(data))
+            .catch((error) => console.error("Error fetching user:", error));
+    }, []);
+
+    return (
+        <div className="App">
+            <h1>사용자 정보</h1>
+                  {user ? (
+                    <p>{user.name} ({user.email})</p>
+                  ) : (
+                    <p>로딩 중...</p>
+                  )}
+        </div>
+    );
 }
 
 export default App;
