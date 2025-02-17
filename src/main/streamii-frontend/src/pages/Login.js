@@ -1,38 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google"; // ✅ GoogleLogin import 추가
+import { jwtDecode } from "jwt-decode"; // ✅ jwtDecode import 수정
 
 function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        console.log("로그인 시도:", email, password);
-        // 로그인 API 연동 후 성공하면 메인 페이지로 이동
-        navigate("/home");
+    const handleSuccess = (response) => {
+        const decoded = jwtDecode(response.credential);
+        console.log("로그인 성공:", decoded);
+        navigate("/home"); // 로그인 성공 후 홈으로 이동
+    };
+
+    const handleFailure = (error) => {
+        console.error("로그인 실패:", error);
     };
 
     return (
         <div className="login-container">
             <h1 className="login-header">로그인</h1>
-            <form className="login-form" onSubmit={handleLogin}>
-                <input
-                    type="email"
-                    placeholder="이메일"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="비밀번호"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit">로그인</button>
-            </form>
+
+            <GoogleLogin
+                onSuccess={handleSuccess}
+                onError={handleFailure}
+            />
+
             <button className="back-button" onClick={() => navigate("/")}>
                 뒤로 가기
             </button>
