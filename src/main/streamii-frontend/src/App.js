@@ -1,24 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Intro from "./pages/Intro";
+import Login from "./pages/Login";
 
 function App() {
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        fetch("http://localhost:8080/test/user")
-            .then((res) => res.json())
-            .then((data) => setUser(data))
-            .catch((error) => console.error("Error fetching user:", error));
-    }, []);
-
     return (
-        <div className="App">
-            <h1>사용자 정보</h1>
-                  {user ? (
-                    <p>{user.name} ({user.email})</p>
-                  ) : (
-                    <p>로딩 중...</p>
-                  )}
-        </div>
+        <Router>
+            <Routes>
+                <Route path="/" element={<Intro />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/home" element={<h1>🎵 음악을 함께 즐겨보세요!</h1>} />
+            </Routes>
+        </Router>
     );
 }
 
