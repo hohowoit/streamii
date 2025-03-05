@@ -17,7 +17,7 @@
     border-radius: 10px;
 }
 
-/* 방 목록 */
+/* 방 목록 (room-list) */
 .room-list {
     margin-top: 20px;
     padding: 10px;
@@ -40,25 +40,42 @@
     background-color: #f0f0f0;
 }
 
-/* 플레이리스트 */
-.playlist {
+/* 플레이리스트 리스트 */
+.playlist-list {
     margin-top: 20px;
-    padding: 10px;
     background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.playlist h2 {
-    margin-bottom: 10px;
-}
-
-.playlist-item {
     padding: 10px;
-    border-bottom: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* 프로필 아이콘 (유저 메뉴) */
+/* 새로 추가 */
+.playlist-list-header {
+    display: flex;              /* 가로 배치 */
+    align-items: center;        /* 세로 정렬 */
+    justify-content: space-between; /* 양 끝 정렬 */
+    margin-bottom: 10px;        /* 아래 간격 */
+}
+
+.playlist-list-header h2 {
+    margin: 0; /* 기본 여백 제거해도 됨 */
+}
+
+.add-playlist-btn {
+    margin: 0; /* 필요 시 조정 */
+    padding: 8px 12px;
+    background-color: #1DB954;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.add-playlist-btn:hover {
+    background-color: #17a645;
+}
+
+/* 프로필 메뉴 */
 .profile-menu {
     position: relative;
 }
@@ -70,15 +87,11 @@
     overflow: hidden;
     cursor: pointer;
     border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.profile-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* 드롭다운 메뉴 */
 .dropdown-menu {
     position: absolute;
     top: 50px;
@@ -102,4 +115,116 @@
 
 .dropdown-menu button:hover {
     background: #f0f0f0;
+}
+
+/* 새 앨범 목록 (albums) 부분 (생략) */
+/* ... */
+
+/* 모달 오버레이 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* 반투명 검정 배경 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+/* 모달 컨텐츠 */
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px; /* 원하는 너비 설정 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-title {
+    margin-top: 0;
+}
+
+.search-title {
+    margin-bottom: 5px;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.input-field {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    flex: 1;
+}
+
+.search-btn {
+    background-color: #1DB954;
+    border: none;
+    padding: 8px 12px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.search-btn:hover {
+    background-color: #17a645;
+}
+
+.search-results {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.search-item {
+    padding: 5px 0;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.create-btn {
+    background-color: #1DB954;
+    border: none;
+    padding: 8px 12px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.create-btn:hover {
+    background-color: #17a645;
+}
+
+.cancel-btn {
+    background-color: #ddd;
+    border: none;
+    padding: 8px 12px;
+    color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.cancel-btn:hover {
+    background-color: #ccc;
+}
+
+/* 모달 페이드인 애니메이션 */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-10px);}
+    100% { opacity: 1; transform: translateY(0);}
 }

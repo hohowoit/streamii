@@ -43,6 +43,15 @@ dependencies {
 
 	// JPA API 추가 (jakarta.persistence)
 	implementation group: 'jakarta.persistence', name: 'jakarta.persistence-api', version: '3.1.0'
+
+	implementation 'org.json:json:20210307'
+
+	implementation 'org.springframework.boot:spring-boot-starter-logging'  // Spring Boot 기본 로깅
+	implementation 'org.slf4j:slf4j-api:2.0.7'  // 최신 SLF4J API
+
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+
 }
 
 tasks.named('test') {
