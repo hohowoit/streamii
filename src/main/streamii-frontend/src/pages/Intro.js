@@ -9,10 +9,16 @@ function Intro() {
             <h1 className="intro-header">Streamii</h1>
 
             <div className="button-group">
-                <button className="login-button" onClick={() => navigate("/login")}>
+                <button
+                    className="login-button"
+                    onClick={() => navigate("/login")}
+                >
                     로그인하기
                 </button>
-                <button className="guest-button" onClick={() => navigate("/home")}>
+                <button
+                    className="guest-button"
+                    onClick={() => navigate("/home")}
+                >
                     게스트로 입장
                 </button>
             </div>

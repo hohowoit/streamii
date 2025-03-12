@@ -6,8 +6,8 @@ function Signup() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [name, setName] = useState("")
-    const [colorId, setColorId] = useState("")
+    const [name, setName] = useState("");
+    const [colorId, setColorId] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const authType = "general";
@@ -37,14 +37,23 @@ function Signup() {
         }
 
         try {
-            await axios.post(`${process.env.REACT_APP_API_BASE_URL}/user/register`, { email, password, name, authType, colorId });
+            await axios.post(
+                `${process.env.REACT_APP_API_BASE_URL}/user/register`,
+                {
+                    email,
+                    password,
+                    name,
+                    authType,
+                    colorId,
+                },
+            );
             setErrorMessage("");
             setSuccessMessage("성공적으로 회원가입 했습니다!");
             setEmail("");
             setPassword("");
             setName("");
             setColorId("");
-            navigate("/login")
+            navigate("/login");
         } catch (error) {
             setErrorMessage("이미 사용 중인 이메일입니다.");
         }
@@ -54,8 +63,8 @@ function Signup() {
         <div>
             <h2>회원 가입 페이지</h2>
             {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
-                {successMessage && (
-                    <div style={{ color: "green" }}>{successMessage}</div>
+            {successMessage && (
+                <div style={{ color: "green" }}>{successMessage}</div>
             )}
             <form onSubmit={handleRegister}>
                 <div>

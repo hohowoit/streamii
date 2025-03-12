@@ -5,9 +5,10 @@ import Intro from "./pages/Intro";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
-import "./styles/home.css";  // 스타일 추가
+import "./styles/home.css"; // 스타일 추가
 
-const CLIENT_ID = "1019024653112-hce0qde0jjrp7lir05nfbi2i90smbflb.apps.googleusercontent.com"; // 여기에 본인의 클라이언트 ID 입력
+const CLIENT_ID =
+    "1019024653112-hce0qde0jjrp7lir05nfbi2i90smbflb.apps.googleusercontent.com"; // 여기에 본인의 클라이언트 ID 입력
 
 function App() {
     return (
@@ -17,7 +18,8 @@ function App() {
                     <Route path="/" element={<Intro />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
-                    //<Route path="/home" element={<Home />} />
+                    //
+                    <Route path="/home" element={<Home />} />
                 </Routes>
             </Router>
         </GoogleOAuthProvider>

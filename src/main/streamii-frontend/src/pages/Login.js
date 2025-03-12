@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google"; // ✅ GoogleLogin import 추가
 import { jwtDecode } from "jwt-decode"; // ✅ jwtDecode import 수정
 import axios from "axios";
+import "../styles/login.css";
 
 function Login() {
     const navigate = useNavigate();
@@ -24,7 +25,10 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/auth/login`, { email, password });
+            const response = await axios.post(
+                `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
+                { email, password },
+            );
             const token = response.data;
             localStorage.setItem("token", token); // JWT 토큰 로컬 스토리지에 저장
             navigate("/");
@@ -35,44 +39,55 @@ function Login() {
 
     return (
         <div className="login-container">
-            <h1 className="login-header">로그인</h1>
+            <div className="contentContainer">
+                <div>
+                    <p
+                        className="header"
+                        onClick={(e) => navigate("/")}
+                    >
+                        Streamii
+                    </p>
+                    <form onSubmit={handleLogin}>
+                        <div>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="example@naver.com"
+                                className="inputContainer"
+                                required
+                            />
+                        </div>
+                        <div>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="password"
+                                className="inputContainer"
+                                required
+                            />
+                        </div>
+                        {errorMessage && (
+                            <div style={{ color: "red" }}>{errorMessage}</div>
+                        )}
+                        <button type="submit" className="submitBtn">로그인</button>
+                    </form>
+                </div>
+                <button
+                    className="signupBtn"
+                    onClick={() => navigate("/signup")}
+                >
+                    회원가입
+                </button>
 
-            <h1 className="login-header">로그인 페이지</h1>
-            <div>
-                <form onSubmit={handleLogin}>
-                    <div>
-                        <label>Email</label>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Password</label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                    {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
-                    <button type="submit">Login</button>
-                </form>
+                <div className="GoogleBtn">
+                    <GoogleLogin
+                        onSuccess={handleSuccess}
+                        onError={handleFailure}
+                    />
+                </div>
             </div>
-            <GoogleLogin
-                onSuccess={handleSuccess}
-                onError={handleFailure}
-            />
-
-            <button className="back-button" onClick={() => navigate("/signup")}>
-                회원 가입
-            </button>
-            <button className="back-button" onClick={() => navigate("/")}>
-                뒤로 가기
-            </button>
         </div>
     );
 }
