@@ -5,10 +5,17 @@ function Home() {
     const navigate = useNavigate();
     const [showMenu, setShowMenu] = useState(false);
     const [albums, setAlbums] = useState([]);
-    const [rooms, setRooms] = useState(["🎧 Chill Vibes", "🎸 Rock Party", "🎶 K-Pop Zone"]);
+    const [rooms, setRooms] = useState([
+        "🎧 Chill Vibes",
+        "🎸 Rock Party",
+        "🎶 K-Pop Zone",
+    ]);
 
     // 플레이리스트 목록
-    const [playlists, setPlaylists] = useState(["My Playlist 1", "My Playlist 2"]);
+    const [playlists, setPlaylists] = useState([
+        "My Playlist 1",
+        "My Playlist 2",
+    ]);
 
     // 새 플레이리스트 생성 모달
     const [showCreateModal, setShowCreateModal] = useState(false);
@@ -33,23 +40,23 @@ function Home() {
 
     // 검색하기
     const handleSearch = () => {
-      const encodedQuery = encodeURIComponent(searchQuery);
-      fetch(`http://localhost:8080/api/spotify/search?q=${encodedQuery}`)
-        .then(res => res.json())
-        .then(data => {
-          if (data.tracks && data.tracks.items) {
-            setSearchResults(data.tracks.items);
-          } else {
-            setSearchResults([]);
-          }
-        })
-        .catch(err => console.error("검색 실패:", err));
+        const encodedQuery = encodeURIComponent(searchQuery);
+        fetch(`http://localhost:8080/api/spotify/search?q=${encodedQuery}`)
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.tracks && data.tracks.items) {
+                    setSearchResults(data.tracks.items);
+                } else {
+                    setSearchResults([]);
+                }
+            })
+            .catch((err) => console.error("검색 실패:", err));
     };
 
     // 곡 선택
     const toggleTrackSelection = (trackId) => {
         if (selectedTracks.includes(trackId)) {
-            setSelectedTracks(selectedTracks.filter(id => id !== trackId));
+            setSelectedTracks(selectedTracks.filter((id) => id !== trackId));
         } else {
             setSelectedTracks([...selectedTracks, trackId]);
         }
@@ -59,20 +66,20 @@ function Home() {
     const handleCreatePlaylist = () => {
         const reqBody = {
             name: newPlaylistName,
-            trackIds: selectedTracks
+            trackIds: selectedTracks,
         };
         fetch("http://localhost:8080/api/spotify/create-playlist", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(reqBody)
+            body: JSON.stringify(reqBody),
         })
-        .then(res => res.text())
-        .then(msg => {
-            console.log("플레이리스트 생성 응답:", msg);
-            setShowCreateModal(false);
-            setPlaylists([...playlists, newPlaylistName]);
-        })
-        .catch(err => console.error("플레이리스트 생성 실패:", err));
+            .then((res) => res.text())
+            .then((msg) => {
+                console.log("플레이리스트 생성 응답:", msg);
+                setShowCreateModal(false);
+                setPlaylists([...playlists, newPlaylistName]);
+            })
+            .catch((err) => console.error("플레이리스트 생성 실패:", err));
     };
 
     const handleLogout = () => {
@@ -87,13 +94,20 @@ function Home() {
                 <h1>🎵 Streamii</h1>
 
                 <div className="profile-menu">
-                    <div className="profile-circle" onClick={() => setShowMenu(!showMenu)}>
+                    <div
+                        className="profile-circle"
+                        onClick={() => setShowMenu(!showMenu)}
+                    >
                         <p>프로필 이미지</p>
                     </div>
                     {showMenu && (
                         <div className="dropdown-menu">
-                            <button onClick={() => navigate("/profile")}>프로필</button>
-                            <button onClick={() => navigate("/settings")}>설정</button>
+                            <button onClick={() => navigate("/profile")}>
+                                프로필
+                            </button>
+                            <button onClick={() => navigate("/settings")}>
+                                설정
+                            </button>
                             <button onClick={handleLogout}>로그아웃</button>
                         </div>
                     )}
@@ -105,7 +119,9 @@ function Home() {
                 <h2>🎤 참여 가능한 방</h2>
                 <ul>
                     {rooms.map((room, index) => (
-                        <li key={index} className="room-item">{room}</li>
+                        <li key={index} className="room-item">
+                            {room}
+                        </li>
                     ))}
                 </ul>
             </section>
@@ -114,16 +130,22 @@ function Home() {
                 {/* 새 래퍼 div */}
                 <div className="playlist-list-header">
                     <h2>나의 플레이리스트</h2>
-                    <button className="add-playlist-btn" onClick={openCreateModal}>+ 플레이리스트 추가</button>
+                    <button
+                        className="add-playlist-btn"
+                        onClick={openCreateModal}
+                    >
+                        + 플레이리스트 추가
+                    </button>
                 </div>
 
                 <ul>
                     {playlists.map((pl, i) => (
-                        <li key={i} className="playlist-name">{pl}</li>
+                        <li key={i} className="playlist-name">
+                            {pl}
+                        </li>
                     ))}
                 </ul>
             </section>
-
 
             {/* 새 앨범 목록 (생략) */}
             {/* ... */}
@@ -155,28 +177,50 @@ function Home() {
                                     setSearchQuery(e.target.value);
                                 }}
                             />
-                            <button className="search-btn" onClick={handleSearch}>검색</button>
+                            <button
+                                className="search-btn"
+                                onClick={handleSearch}
+                            >
+                                검색
+                            </button>
                         </div>
 
                         {/* 검색 결과 목록 */}
                         <ul className="search-results">
-                            {searchResults.map(track => (
+                            {searchResults.map((track) => (
                                 <li key={track.id} className="search-item">
                                     <label>
                                         <input
                                             type="checkbox"
-                                            checked={selectedTracks.includes(track.id)}
-                                            onChange={() => toggleTrackSelection(track.id)}
+                                            checked={selectedTracks.includes(
+                                                track.id,
+                                            )}
+                                            onChange={() =>
+                                                toggleTrackSelection(track.id)
+                                            }
                                         />
-                                        {track.name} - {track.artists.map(a => a.name).join(", ")}
+                                        {track.name} -{" "}
+                                        {track.artists
+                                            .map((a) => a.name)
+                                            .join(", ")}
                                     </label>
                                 </li>
                             ))}
                         </ul>
 
                         <div className="modal-buttons">
-                            <button className="create-btn" onClick={handleCreatePlaylist}>생성</button>
-                            <button className="cancel-btn" onClick={closeCreateModal}>취소</button>
+                            <button
+                                className="create-btn"
+                                onClick={handleCreatePlaylist}
+                            >
+                                생성
+                            </button>
+                            <button
+                                className="cancel-btn"
+                                onClick={closeCreateModal}
+                            >
+                                취소
+                            </button>
                         </div>
                     </div>
                 </div>

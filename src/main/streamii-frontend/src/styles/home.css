@@ -46,15 +46,15 @@
     background-color: white;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* 새로 추가 */
 .playlist-list-header {
-    display: flex;              /* 가로 배치 */
-    align-items: center;        /* 세로 정렬 */
+    display: flex; /* 가로 배치 */
+    align-items: center; /* 세로 정렬 */
     justify-content: space-between; /* 양 끝 정렬 */
-    margin-bottom: 10px;        /* 아래 간격 */
+    margin-bottom: 10px; /* 아래 간격 */
 }
 
 .playlist-list-header h2 {
@@ -64,7 +64,7 @@
 .add-playlist-btn {
     margin: 0; /* 필요 시 조정 */
     padding: 8px 12px;
-    background-color: #1DB954;
+    background-color: #1db954;
     color: white;
     border: none;
     border-radius: 5px;
@@ -127,7 +127,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.5); /* 반투명 검정 배경 */
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -140,7 +140,7 @@
     padding: 20px;
     border-radius: 10px;
     width: 400px; /* 원하는 너비 설정 */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     animation: fadeIn 0.3s ease-in-out;
 }
 
@@ -166,7 +166,7 @@
 }
 
 .search-btn {
-    background-color: #1DB954;
+    background-color: #1db954;
     border: none;
     padding: 8px 12px;
     color: white;
@@ -196,7 +196,7 @@
 }
 
 .create-btn {
-    background-color: #1DB954;
+    background-color: #1db954;
     border: none;
     padding: 8px 12px;
     color: white;
@@ -225,6 +225,12 @@
 
 /* 모달 페이드인 애니메이션 */
 @keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(-10px);}
-    100% { opacity: 1; transform: translateY(0);}
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

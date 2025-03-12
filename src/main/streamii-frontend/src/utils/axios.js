@@ -18,7 +18,7 @@ axiosInstance.interceptors.request.use(
     },
     (error) => {
         return Promise.reject(error);
-    }
+    },
 );
 
 // 응답을 받을 때, 만료된 토큰이면 로그아웃 처리
@@ -31,7 +31,7 @@ axiosInstance.interceptors.response.use(
             window.location.href = "/login";
         }
         return Promise.reject(error);
-    }
+    },
 );
 
 export default axiosInstance;
