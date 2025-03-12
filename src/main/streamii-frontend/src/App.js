@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Intro from "./pages/Intro";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import "./styles/home.css";  // 스타일 추가
 
@@ -15,6 +16,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Intro />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
                     <Route path="/home" element={<Home />} />
                 </Routes>
             </Router>

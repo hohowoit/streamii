@@ -1,8 +1,7 @@
-package com.hohowoit.streamii_backend.config;
-
-import com.hohowoit.streamii_backend.security.JwtAuthenticationFilter;
-import com.hohowoit.streamii_backend.security.JwtTokenProvider;
+package com.hohowoit.streamii_backend.security;
 import com.hohowoit.streamii_backend.service.CustomUserDetailsService;
+
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,14 +27,15 @@ public class SecurityConfig {
     private final JwtTokenProvider jwtTokenProvider;
     private final CustomUserDetailsService userDetailsService;
 
+    //Preflight 요청(Options 메서드)에 대한 응답 처리
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/user/register", "/api/auth/**").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/api/user/register", "/api/auth/**").permitAll()       // 인증 없이 접근 가능한 URL
+                        .anyRequest().authenticated()                                                    // 그 외의 요청은 인증된 사용자만 접근 가능
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, userDetailsService),
                         UsernamePasswordAuthenticationFilter.class)
@@ -48,6 +48,7 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
+    // 비밀번호 암호화
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -56,9 +57,9 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000")); // React 주소
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.addAllowedOrigin("http://localhost:3000");
+        configuration.addAllowedMethod("*");
+        configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
