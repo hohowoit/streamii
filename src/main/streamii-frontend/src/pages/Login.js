@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google"; // ✅ GoogleLogin import 추가
 import { jwtDecode } from "jwt-decode"; // ✅ jwtDecode import 수정
 import axios from "axios";
-import "../styles/login.css";
+import styles from "../styles/Login.module.css";
 
 function Login() {
     const navigate = useNavigate();
@@ -38,11 +38,11 @@ function Login() {
     };
 
     return (
-        <div className="login-container">
-            <div className="contentContainer">
+        <div className={styles.loginContainer}>
+            <div className={styles.contentContainer}>
                 <div>
                     <p
-                        className="header"
+                        className={styles.header}
                         onClick={(e) => navigate("/")}
                     >
                         Streamii
@@ -54,7 +54,7 @@ function Login() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="example@naver.com"
-                                className="inputContainer"
+                                className={styles.inputContainer}
                                 required
                             />
                         </div>
@@ -64,24 +64,24 @@ function Login() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="password"
-                                className="inputContainer"
+                                className={styles.inputContainer}
                                 required
                             />
                         </div>
                         {errorMessage && (
                             <div style={{ color: "red" }}>{errorMessage}</div>
                         )}
-                        <button type="submit" className="submitBtn">로그인</button>
+                        <button type="submit" className={styles.submitBtn}>로그인</button>
                     </form>
                 </div>
                 <button
-                    className="signupBtn"
+                    className={styles.signupBtn}
                     onClick={() => navigate("/signup")}
                 >
                     회원가입
                 </button>
 
-                <div className="GoogleBtn">
+                <div className={styles.GoogleBtn}>
                     <GoogleLogin
                         onSuccess={handleSuccess}
                         onError={handleFailure}
