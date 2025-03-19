@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/user/register", "/api/auth/**").permitAll()       // 인증 없이 접근 가능한 URL
+                        .requestMatchers("/api/user/register", "/api/auth/**", "/api/youtube/**").permitAll()       // 인증 없이 접근 가능한 URL
                         .anyRequest().authenticated()                                                    // 그 외의 요청은 인증된 사용자만 접근 가능
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, userDetailsService),

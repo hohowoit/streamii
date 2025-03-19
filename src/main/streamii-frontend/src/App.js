@@ -5,6 +5,7 @@ import Intro from "./pages/Intro";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
+import YoutubeSearchPlayer from "./pages/YoutubeSearchPlayer";
 import "./styles/home.css"; // 스타일 추가
 
 const CLIENT_ID =
@@ -18,6 +19,7 @@ function App() {
                     <Route path="/" element={<Intro />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
+                    <Route path="/YoutubeSearchPlayer" element={<YoutubeSearchPlayer />} />
                     //
                     <Route path="/home" element={<Home />} />
                 </Routes>
